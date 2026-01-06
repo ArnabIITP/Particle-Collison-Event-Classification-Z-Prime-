@@ -5,8 +5,14 @@ This project is a **particle-collision event classification** workflow implement
 
 **Goal:** Train a supervised ML model to distinguish a **signal** process from a **background** process using event-level and object-level features stored in ROOT ntuples.
 
-- **Signal dataset:** a heavy resonance **Z′ → t\bar{t}** (here a Z′ mass point of about 3000 GeV, inferred from the filename)
-- **Background dataset:** a Standard Model-like sample (**tt̄ + WW**, inferred from filename)
+- **Signal sample:** `...zprime3000_tt...` (Z′ → t\bar{t} at a 3000 GeV mass point, based on the filename)
+- **Background sample:** `...ttbarWW...` (based on the filename)
+
+**Data source:** These ROOT ntuples come from the ATLAS Open Data “Open Data for Education and Outreach” release on the CERN Open Data Portal:
+- https://opendata.cern.ch/record/93913
+
+The record requests that you cite it as:
+“ATLAS collaboration (2025). ATLAS ROOT ntuple format MC simulation, 2015+2016 proton-proton collisions beta release, 2J2LMET30 skim. CERN Open Data Portal. DOI: 10.7483/OPENDATA.ATLAS.NNF8.76IX”.
 
 **Output of the notebook:**
 - A merged feature table for signal+background
@@ -40,7 +46,7 @@ Particle collision event classification/
 ## 3) Environment Requirements
 
 ### OS
-- Developed for **Windows** paths (the notebook anchors to `D:\Particle collision event classification`).
+- OS-independent (Windows/macOS/Linux). The notebook resolves paths relative to the repository folder.
 
 ### Python
 - Python 3.9+ recommended (3.10/3.11 usually fine).
@@ -78,13 +84,15 @@ Open `Particle collision.ipynb` in VS Code (or Jupyter).
 Run all cells from top to bottom.
 
 The first cell:
-- Sets `WORKSPACE_DIR = D:\Particle collision event classification`
-- Chooses `DATA_DIR` as `WORKSPACE_DIR/Data` (if it exists)
+- Locates the repository folder (using the current working directory, and falling back to walking up to find `.git`)
+- Uses `DATA_DIR = <repo>/Data`
 - Asserts both ROOT files exist
-- Opens the signal ROOT file with `uproot.open(...)`
 
 The second cell:
 - Installs required Python packages into the notebook kernel if they are missing
+
+The third cell:
+- Opens the signal ROOT file with `uproot.open(...)` and lists the ROOT keys
 
 After that, the notebook:
 - Inspects ROOT keys
@@ -128,6 +136,8 @@ Interpretation:
 - `mc_410081`: background MC dataset ID
 - `MadGraphPythia8EvtGen`: generator chain used
 - `ttbarWW`: physics process label (top pair plus WW, or a related combined sample)
+
+For the official definition of the **2J2LMET30** skim in this release, see the CERN Open Data record. It describes the applied skimming selection at a high level (≥2 jets, ≥2 leptons, and MET ≥ 30 GeV; with additional ID requirements).
 
 **Important:** Filenames encode production metadata but are not a guarantee of exact selection definitions. For authoritative definitions (cuts, object definitions, units), you’d normally check production documentation, ntuple schema docs, or metadata.
 
