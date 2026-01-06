@@ -1,0 +1,8 @@
+numpy
+pandas
+matplotlib
+uproot
+awkward
+scikit-learn
+xgboost
+vector
