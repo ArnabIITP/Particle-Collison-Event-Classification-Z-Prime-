@@ -333,3 +333,8 @@ Then you can extend Section 8 by documenting the additional branches.
 If you want, tell me whether you want the README to document:
 - **Only branches used in the notebook** (current behavior; accurate and manageable), or
 - **Every branch in the tree** (can be very long; requires extracting full `tree.keys()` output).
+
+
+## 11) License
+
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE).
